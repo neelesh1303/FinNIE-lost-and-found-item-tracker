@@ -3,6 +3,7 @@ from flask_mysqldb import MySQL
 import os
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 
@@ -14,6 +15,7 @@ app.config['MYSQL_USER'] = os.getenv('MYSQL_USER', 'root')
 app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
 app.config['MYSQL_DB'] = os.getenv('MYSQL_DB', 'lost_and_found')
 app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT', 3306))
+app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 # Create upload folder if it doesn't exist
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
@@ -83,9 +85,13 @@ def submit():
 # Reported items page: Shows only items marked as 'found'
 @app.route('/reported')
 def reported_items():
+    start_time = time.perf_counter()
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM reports WHERE status = 'found' ORDER BY id DESC")
     found_items = cur.fetchall()
+    end_time = time.perf_counter()
+    query_time = end_time - start_time
+    print(f"Search query time: {query_time * 1000:.3f} ms")
     cur.close()
     return render_template('reported.html', reports=found_items)
 
