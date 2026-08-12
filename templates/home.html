@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}FinNIE · Welcome{% endblock %}
+
+{% block content %}
+  <section class="hero-card">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1>FinNIE helps your community find missing items faster.</h1>
+        <p>Secure, simple, and beautiful lost &amp; found reporting built for people who want clarity, trust, and speed in reuniting items with their owners.</p>
+        <div class="hero-actions">
+          <a href="{{ url_for('login') }}" class="btn btn-primary">Go to Login</a>
+          <a href="{{ url_for('report') }}" class="btn btn-secondary">Submit a Report</a>
+        </div>
+      </div>
+      <div class="info-card">
+        <h3>What is FinNIE?</h3>
+        <p>FinNIE is a modern lost &amp; found platform for reporting missing items, locating found goods, and connecting owners with finders through an easy dashboard.</p>
+        <ul>
+          <li>Fast report submission with image support</li>
+          <li>Clear status tracking for lost, found, and resolved items</li>
+          <li>Responsive, consistent design across pages</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Instant navigation</h3>
+        <p>Use the tab bar at the top to switch pages instantly. Every page shares a single, polished theme.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Report with confidence</h3>
+        <p>Submit lost and found item details along with optional images so your community can recover items quickly.</p>
+      </div>
+      <div class="feature-card">
+        <h3>See found items</h3>
+        <p>Browse the reported items page to discover found goods and contact the original reporter directly.</p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

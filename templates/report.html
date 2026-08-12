@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}FinNIE · Report Item{% endblock %}
+
+{% block content %}
+  <section class="page-card form-panel">
+    <div class="section-heading">
+      <h2>Submit a lost or found report</h2>
+    </div>
+    <p>Tell us what happened and attach a photo if available. We will route your report to the community for a faster reunion.</p>
+    <form action="{{ url_for('submit') }}" method="POST" enctype="multipart/form-data">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="name@example.com" required />
+
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required />
+
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="">Select category</option>
+        <option value="electronics">Electronics</option>
+        <option value="documents">Documents</option>
+        <option value="clothing">Clothing</option>
+        <option value="others">Others</option>
+      </select>
+
+      <label for="description">Item Description</label>
+      <textarea id="description" name="description" rows="4" placeholder="Describe the item and where it was lost or found." required></textarea>
+
+      <label for="reportedDate">Date Reported</label>
+      <input type="date" id="reportedDate" name="reportedDate" required />
+
+      <label for="status">Status</label>
+      <select id="status" name="status" required>
+        <option value="">Select status</option>
+        <option value="lost">Lost</option>
+        <option value="found">Found</option>
+        <option value="resolved">Resolved</option>
+      </select>
+
+      <label for="image">Attach item image (optional)</label>
+      <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)" />
+      <img id="image-preview" class="preview-image" style="display:none;" />
+
+      <button type="submit">Submit Report</button>
+    </form>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function previewImage(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function () {
+      const output = document.getElementById('image-preview');
+      output.src = reader.result;
+      output.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
+{% endblock %}

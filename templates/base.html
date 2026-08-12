@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}FinNIE{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">F</div>
+      <div>
+        <div class="brand-name">FinNIE</div>
+        <div class="brand-tag">Find, Identify, Notify, Inform, Engage</div>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a>
+      <a href="{{ url_for('login') }}" class="{% if request.endpoint == 'login' %}active{% endif %}">Login</a>
+      <a href="{{ url_for('report') }}" class="{% if request.endpoint == 'report' %}active{% endif %}">Report Item</a>
+      <a href="{{ url_for('reported_items') }}" class="{% if request.endpoint == 'reported_items' %}active{% endif %}">Reported Items</a>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>FinNIE &copy; 2026 | Trusted lost &amp; found reporting.</p>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

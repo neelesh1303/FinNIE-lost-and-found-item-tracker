@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}FinNIE · Login{% endblock %}
+
+{% block content %}
+  <section class="page-card form-panel">
+    <div class="section-heading">
+      <h2>Login to FinNIE</h2>
+    </div>
+    <p>Enter your username and password to continue. This demo login takes you directly to the reporting page.</p>
+    <form method="POST" action="{{ url_for('login') }}">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" placeholder="Your name" required />
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" placeholder="Password" required />
+      <button type="submit">Continue to Report</button>
+    </form>
+  </section>
+{% endblock %}
