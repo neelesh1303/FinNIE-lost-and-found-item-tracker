@@ -7,6 +7,30 @@
     <div class="section-heading">
       <h2>Reported Found Items</h2>
     </div>
+
+    <form method="get" action="{{ url_for('reported_items') }}" class="filter-form">
+      <div class="filter-group">
+        <label for="search">Keyword</label>
+        <input type="text" id="search" name="q" value="{{ search_query }}" placeholder="Search by name, category, or description" />
+      </div>
+
+      <div class="filter-group">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option value="">All categories</option>
+          <option value="electronics" {% if category_filter == 'electronics' %}selected{% endif %}>Electronics</option>
+          <option value="documents" {% if category_filter == 'documents' %}selected{% endif %}>Documents</option>
+          <option value="clothing" {% if category_filter == 'clothing' %}selected{% endif %}>Clothing</option>
+          <option value="others" {% if category_filter == 'others' %}selected{% endif %}>Others</option>
+        </select>
+      </div>
+
+      <div class="filter-actions">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a href="{{ url_for('reported_items') }}" class="btn btn-secondary">Clear</a>
+      </div>
+    </form>
+
     {% if reports %}
       <div class="card-grid">
         {% for report in reports %}
@@ -24,84 +48,8 @@
       </div>
     {% else %}
       <div class="no-data">
-        <p>No found items have been reported yet. Try submitting a report or check back later.</p>
+        <p>No matching found items were found. Try a different keyword or category.</p>
       </div>
     {% endif %}
   </section>
 {% endblock %}
-
-    .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background-color: white;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .card h3 {
-      margin: 10px 0 5px;
-      font-size: 18px;
-    }
-
-    .card p {
-      font-size: 14px;
-      margin: 4px 0;
-    }
-
-    .back-link {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .back-link a {
-      text-decoration: none;
-      color: #2f80ed;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-
-  <header>Reported Found Items</header>
-
-  <div class="container">
-    <div class="grid">
-      {% for report in reports %}
-        <div class="card">
-          {% if report[8] %}
-            <img src="{{ url_for('static', filename='uploads/' + report[8]) }}" alt="Found Item Image">
-          {% endif %}
-          <h3>{{ report[1] }}</h3>
-          <p><strong>Category:</strong> {{ report[4] }}</p>
-          <p><strong>Description:</strong> {{ report[5] }}</p>
-          <p><strong>Reported Date:</strong> {{ report[6] }}</p>
-          <p><strong>Contact:</strong> {{ report[2] }} / {{ report[3] }}</p>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-
-  <div class="back-link">
-    <a href="{{ url_for('index') }}">← Back to Home</a>
-  </div>
-
-</body>
-</html>

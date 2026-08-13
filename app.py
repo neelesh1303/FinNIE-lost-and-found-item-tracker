@@ -3,7 +3,7 @@ from flask_mysqldb import MySQL
 import os
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
-import time
+# import time
 
 load_dotenv()
 
@@ -30,13 +30,6 @@ mysql = MySQL(app)
 def home():
     return render_template('home.html')
 
-# Login page
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        return redirect(url_for('report'))
-    return render_template('login.html')
-
 # Report item page
 @app.route('/report')
 def report():
@@ -47,13 +40,16 @@ def report():
 def submit():
     # Get form data
     name = request.form['name']
-    email = request.form['email']
+    email = request.form['email'].strip().lower()
     phone = request.form['phone']
     category = request.form['category']
     description = request.form['description']
     reported_date = request.form['reportedDate']
     status = request.form['status']
     image_file = request.files['image']
+
+    if not email.endswith('@nie.ac.in'):
+        return "Only @nie.ac.in email addresses are allowed.", 400
 
     # Handle image upload
     image_filename = None
@@ -85,15 +81,32 @@ def submit():
 # Reported items page: Shows only items marked as 'found'
 @app.route('/reported')
 def reported_items():
-    start_time = time.perf_counter()
+    # start_time = time.perf_counter()
+    search_query = request.args.get('q', '').strip()
+    category = request.args.get('category', '').strip()
+
+    query = "SELECT * FROM reports WHERE status = 'found'"
+    params = []
+
+    if search_query:
+        query += " AND (LOWER(name) LIKE LOWER(%s) OR LOWER(category) LIKE LOWER(%s) OR LOWER(description) LIKE LOWER(%s))"
+        term = f"%{search_query}%"
+        params.extend([term, term, term])
+
+    if category:
+        query += " AND category = %s"
+        params.append(category)
+
+    query += " ORDER BY id DESC"
+
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM reports WHERE status = 'found' ORDER BY id DESC")
+    cur.execute(query, params)
     found_items = cur.fetchall()
-    end_time = time.perf_counter()
-    query_time = end_time - start_time
-    print(f"Search query time: {query_time * 1000:.3f} ms")
+    # end_time = time.perf_counter()
+    # query_time = end_time - start_time
+    # print(f"Search query time: {query_time * 1000:.3f} ms")
     cur.close()
-    return render_template('reported.html', reports=found_items)
+    return render_template('reported.html', reports=found_items, search_query=search_query, category_filter=category)
 
 # ---------- Run the App ----------
 if __name__ == '__main__':

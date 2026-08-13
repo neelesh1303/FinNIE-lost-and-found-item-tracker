@@ -308,6 +308,62 @@ textarea {
   cursor: pointer;
 }
 
+.filter-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  gap: 1rem;
+  align-items: end;
+  margin: 1.5rem 0 2rem;
+}
+
+.filter-group {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.filter-group input,
+.filter-group select {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(148, 163, 184, 0.12);
+  color: #f8fafc;
+  padding: 0.9rem 1rem;
+}
+
+.filter-group select option {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.filter-group select option:checked,
+.filter-group select option:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filter-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .form-panel button:hover {
   filter: brightness(1.05);
 }

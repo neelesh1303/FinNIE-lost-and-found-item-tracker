@@ -17,7 +17,6 @@
     </div>
     <nav class="site-nav">
       <a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a>
-      <a href="{{ url_for('login') }}" class="{% if request.endpoint == 'login' %}active{% endif %}">Login</a>
       <a href="{{ url_for('report') }}" class="{% if request.endpoint == 'report' %}active{% endif %}">Report Item</a>
       <a href="{{ url_for('reported_items') }}" class="{% if request.endpoint == 'reported_items' %}active{% endif %}">Reported Items</a>
     </nav>
