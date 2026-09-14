@@ -3,11 +3,19 @@ from flask_mysqldb import MySQL
 import os
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 # import time
 
 load_dotenv()
 
 app = Flask(__name__)
+
+limiter = Limiter(
+    key_func=get_remote_address,
+    app=app,
+    default_limits=[]
+)
 
 # ---------- Configuration ----------
 app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST', 'localhost')
@@ -37,6 +45,7 @@ def report():
 
 # Form submission handler
 @app.route('/submit', methods=['POST'])
+@limiter.limit("10 per minute")
 def submit():
     # Get form data
     name = request.form['name']
