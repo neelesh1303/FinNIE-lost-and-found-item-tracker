@@ -1,4 +1,4 @@
-# 🔎 FinNIE — Lost & Found Item Tracker
+# 🔎 FinNIE — Campus Lost & Found Item Tracker
 
 **FinNIE** is a simple web-based Lost & Found platform designed to make it easier for people to report missing items, share found items, and help them get back to their owners.
 
