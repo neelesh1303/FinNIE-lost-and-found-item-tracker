@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="100%" height="100%" class="mascot-svg mascot-girl-svg">
+  <defs>
+    <!-- Cool Tech Blue & Slate Gradients -->
+    <linearGradient id="girlSkinTone" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#a16244" />
+      <stop offset="100%" stop-color="#7c3a20" />
+    </linearGradient>
+    <linearGradient id="coolGirlHair" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1e24" />
+      <stop offset="100%" stop-color="#0b0c10" />
+    </linearGradient>
+    <linearGradient id="trenchNavyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0369a1" />
+      <stop offset="100%" stop-color="#0c4a6e" />
+    </linearGradient>
+    <linearGradient id="opticsLensGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(56, 189, 248, 0.85)" />
+      <stop offset="50%" stop-color="rgba(2, 132, 199, 0.45)" />
+      <stop offset="100%" stop-color="rgba(30, 58, 138, 0.75)" />
+    </linearGradient>
+    <filter id="opticsGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Character Group: Cool College Scout (Girl) -->
+  <g class="girl-character-group">
+    <!-- Chic Top Knot / Double Bun -->
+    <g class="hair-buns">
+      <circle cx="132" cy="132" r="32" fill="url(#coolGirlHair)" />
+      <circle cx="118" cy="120" r="12" fill="#0b0c10" opacity="0.6"/>
+      <!-- Minimalist Gunmetal Hair Ring -->
+      <ellipse cx="148" cy="154" rx="12" ry="5" fill="#38bdf8" transform="rotate(-30 148 154)"/>
+
+      <circle cx="268" cy="132" r="32" fill="url(#coolGirlHair)" />
+      <circle cx="282" cy="120" r="12" fill="#0b0c10" opacity="0.6"/>
+      <ellipse cx="252" cy="154" rx="12" ry="5" fill="#38bdf8" transform="rotate(30 252 154)"/>
+    </g>
+
+    <!-- Neck -->
+    <rect x="188" y="252" width="24" height="26" rx="6" fill="#7c3a20" />
+
+    <!-- Modern Tailored Collegiate Trench / Cardigan -->
+    <path d="M135 285 C135 268 165 260 200 260 C235 260 265 268 265 285 L275 440 C275 455 245 465 200 465 C155 465 125 455 125 440 Z" fill="url(#trenchNavyGrad)" />
+    <!-- Lapels -->
+    <path d="M174 260 L200 315 L226 260" fill="#0f172a" />
+    <path d="M185 260 L200 290 L215 260" fill="#0284c7" />
+
+    <!-- Head & Face -->
+    <g class="girl-head">
+      <ellipse cx="200" cy="198" rx="52" ry="56" fill="url(#girlSkinTone)" />
+      
+      <!-- Minimalist Stud Earrings -->
+      <circle cx="146" cy="202" r="3" fill="#38bdf8" />
+      <circle cx="254" cy="202" r="3" fill="#38bdf8" />
+
+      <!-- Sharp Sleek Brows -->
+      <path d="M164 174 Q176 168 188 174" fill="none" stroke="#1e1e24" stroke-width="3" stroke-linecap="round" />
+      <path d="M212 174 Q224 168 236 174" fill="none" stroke="#1e1e24" stroke-width="3" stroke-linecap="round" />
+
+      <!-- Expressive Cool Eyes Behind Wireframe Glasses -->
+      <g class="girl-eyes">
+        <ellipse cx="176" cy="192" rx="11" ry="12" fill="#ffffff" />
+        <g class="pupil-left">
+          <circle cx="177" cy="192" r="6.5" fill="#0b0c10" />
+          <circle cx="175" cy="189" r="2.8" fill="#38bdf8" />
+          <circle cx="178" cy="193" r="1.2" fill="#ffffff" />
+        </g>
+
+        <ellipse cx="224" cy="192" rx="11" ry="12" fill="#ffffff" />
+        <g class="pupil-right">
+          <circle cx="223" cy="192" r="6.5" fill="#0b0c10" />
+          <circle cx="221" cy="189" r="2.8" fill="#38bdf8" />
+          <circle cx="224" cy="193" r="1.2" fill="#ffffff" />
+        </g>
+      </g>
+
+      <!-- Sleek Geometric Wireframe Glasses -->
+      <g class="girl-glasses">
+        <!-- Octagonal / Geometric Polygon Frames -->
+        <polygon points="160,180 188,180 196,192 188,206 160,206 152,192" fill="rgba(56, 189, 248, 0.08)" stroke="#38bdf8" stroke-width="2.5" />
+        <polygon points="212,180 240,180 248,192 240,206 212,206 204,192" fill="rgba(56, 189, 248, 0.08)" stroke="#38bdf8" stroke-width="2.5" />
+        <!-- Sleek Bridge -->
+        <line x1="196" y1="190" x2="204" y2="190" stroke="#38bdf8" stroke-width="2.5" />
+        <!-- Glare Line -->
+        <line x1="164" y1="184" x2="178" y2="198" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
+        <line x1="216" y1="184" x2="230" y2="198" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
+      </g>
+
+      <!-- Nose -->
+      <path d="M198 204 L202 210 L197 211" fill="none" stroke="#5c2612" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+
+      <!-- Subtle Smart Smile -->
+      <path d="M193 225 Q200 231 209 225" fill="none" stroke="#1e1e24" stroke-width="2.5" stroke-linecap="round" />
+
+      <!-- Modern Textured Fringe -->
+      <g class="girl-bangs">
+        <path d="M152 165 C170 152 230 152 248 165 C232 155 168 155 152 165 Z" fill="url(#coolGirlHair)" />
+      </g>
+    </g>
+
+    <!-- Left Arm -->
+    <g class="girl-arm-left">
+      <path d="M142 295 Q152 345 180 335" fill="none" stroke="url(#trenchNavyGrad)" stroke-width="14" stroke-linecap="round" />
+      <circle cx="184" cy="332" r="7" fill="#a16244" />
+    </g>
+
+    <!-- Right Arm Holding High-Tech Optical Scanner -->
+    <g class="girl-scanner-arm">
+      <path d="M258 295 Q282 335 268 360" fill="none" stroke="url(#trenchNavyGrad)" stroke-width="14" stroke-linecap="round" />
+      
+      <!-- Tech Optical Scanner Tool -->
+      <g class="magnifying-glass-tool" transform="translate(282, 335)">
+        <!-- Carbon Handle -->
+        <line x1="0" y1="0" x2="28" y2="36" stroke="#0f172a" stroke-width="7" stroke-linecap="round"/>
+        <line x1="1" y1="1" x2="26" y2="34" stroke="#38bdf8" stroke-width="2" stroke-linecap="round"/>
+        <!-- Scanner Ring -->
+        <circle cx="-10" cy="-12" r="26" fill="none" stroke="#0f172a" stroke-width="6" />
+        <circle cx="-10" cy="-12" r="24" fill="none" stroke="#38bdf8" stroke-width="2.5" />
+        <!-- Cyan Scanner Lens -->
+        <circle cx="-10" cy="-12" r="21" fill="url(#opticsLensGrad)" filter="url(#opticsGlow)" />
+        <!-- Reticle Crosshair -->
+        <circle cx="-10" cy="-12" r="10" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="3 3" opacity="0.8"/>
+        <line x1="-10" y1="-22" x2="-10" y2="-2" stroke="#ffffff" stroke-width="1.2" opacity="0.8"/>
+        <line x1="-20" y1="-12" x2="0" y2="-12" stroke="#ffffff" stroke-width="1.2" opacity="0.8"/>
+      </g>
+    </g>
+  </g>
+</svg>

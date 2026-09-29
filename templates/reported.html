@@ -1,55 +1,194 @@
 {% extends 'base.html' %}
 
-{% block title %}FinNIE · Reported Items{% endblock %}
+{% block title %}FinNIE · Found Items Registry{% endblock %}
 
 {% block content %}
-  <section class="page-card">
-    <div class="section-heading">
-      <h2>Reported Found Items</h2>
-    </div>
 
-    <form method="get" action="{{ url_for('reported_items') }}" class="filter-form">
-      <div class="filter-group">
-        <label for="search">Keyword</label>
-        <input type="text" id="search" name="q" value="{{ search_query }}" placeholder="Search by name, category, or description" />
+  <!-- ========================================================================= -->
+  <!-- Page Header & Filter Control Center                                       -->
+  <!-- ========================================================================= -->
+  <section class="filter-control-panel">
+    <div class="section-header-row" style="margin-bottom:1.1rem;">
+      <div class="section-title-group">
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" style="width:20px; height:24px;" alt="NIE Crest" />
+          <h2 style="margin:0; font-size:1.45rem;">Found Items Registry</h2>
+        </div>
+        <p>Active registry of unattended items recovered on NIE campus awaiting verified return</p>
       </div>
 
-      <div class="filter-group">
-        <label for="category">Category</label>
-        <select id="category" name="category">
-          <option value="">All categories</option>
-          <option value="electronics" {% if category_filter == 'electronics' %}selected{% endif %}>Electronics</option>
-          <option value="documents" {% if category_filter == 'documents' %}selected{% endif %}>Documents</option>
-          <option value="clothing" {% if category_filter == 'clothing' %}selected{% endif %}>Clothing</option>
-          <option value="others" {% if category_filter == 'others' %}selected{% endif %}>Others</option>
+      <!-- View Switcher (Cards Grid <-> Table View) -->
+      <div class="view-mode-toggle">
+        <button type="button" class="view-mode-btn active" id="btn-view-grid" title="Switch to Grid View">
+          <span>Grid</span>
+        </button>
+        <button type="button" class="view-mode-btn" id="btn-view-table" title="Switch to Table View">
+          <span>Table</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Search & Filter Form -->
+    <form method="GET" action="{{ url_for('reported_items') }}" class="filter-toolbar">
+      <div class="filter-inputs-group">
+        <div class="filter-search-input">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search" name="q" value="{{ search_query }}" placeholder="Filter registry by keyword, item name, or location..." autocomplete="off" />
+        </div>
+
+        <select name="category" class="filter-select" onchange="this.form.submit()">
+          <option value="">All Classifications</option>
+          <option value="electronics" {% if category_filter == 'electronics' %}selected{% endif %}>Electronics &amp; Hardware</option>
+          <option value="documents" {% if category_filter == 'documents' %}selected{% endif %}>ID Cards &amp; Documentation</option>
+          <option value="clothing" {% if category_filter == 'clothing' %}selected{% endif %}>Bags &amp; Apparel</option>
+          <option value="others" {% if category_filter == 'others' %}selected{% endif %}>Keys &amp; Others</option>
         </select>
       </div>
 
-      <div class="filter-actions">
-        <button type="submit" class="btn btn-primary">Search</button>
-        <a href="{{ url_for('reported_items') }}" class="btn btn-secondary">Clear</a>
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+        {% if search_query or category_filter %}
+          <a href="{{ url_for('reported_items') }}" class="btn btn-secondary btn-sm">Reset</a>
+        {% endif %}
       </div>
     </form>
 
-    {% if reports %}
-      <div class="card-grid">
-        {% for report in reports %}
-          <article class="report-card">
-            {% if report[8] %}
-              <img src="{{ url_for('static', filename='uploads/' + report[8]) }}" alt="Found Item Image">
-            {% endif %}
-            <h3>{{ report[1] }}</h3>
-            <p><strong>Category:</strong> {{ report[4] }}</p>
-            <p><strong>Description:</strong> {{ report[5] }}</p>
-            <p><strong>Reported Date:</strong> {{ report[6] }}</p>
-            <p><strong>Contact:</strong> {{ report[2] }} / {{ report[3] }}</p>
-          </article>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="no-data">
-        <p>No matching found items were found. Try a different keyword or category.</p>
-      </div>
-    {% endif %}
+    <!-- Quick Category Chips -->
+    <div class="category-filter-chips">
+      <a href="{{ url_for('reported_items') }}" class="category-filter-chip {% if not category_filter %}active{% endif %}">All Items</a>
+      <a href="{{ url_for('reported_items') }}?category=electronics{% if search_query %}&q={{ search_query }}{% endif %}" class="category-filter-chip {% if category_filter == 'electronics' %}active{% endif %}">Electronics</a>
+      <a href="{{ url_for('reported_items') }}?category=documents{% if search_query %}&q={{ search_query }}{% endif %}" class="category-filter-chip {% if category_filter == 'documents' %}active{% endif %}">Documentation &amp; IDs</a>
+      <a href="{{ url_for('reported_items') }}?category=clothing{% if search_query %}&q={{ search_query }}{% endif %}" class="category-filter-chip {% if category_filter == 'clothing' %}active{% endif %}">Bags &amp; Apparel</a>
+      <a href="{{ url_for('reported_items') }}?category=others{% if search_query %}&q={{ search_query }}{% endif %}" class="category-filter-chip {% if category_filter == 'others' %}active{% endif %}">Keys &amp; Miscellaneous</a>
+    </div>
   </section>
+
+  <!-- ========================================================================= -->
+  <!-- Items Container: Card Grid View (Default)                                 -->
+  <!-- ========================================================================= -->
+  <div id="view-grid-container" class="card-grid">
+    {% if reports %}
+      {% for report in reports %}
+        <article class="report-card" 
+                 data-name="{{ report[1] }}" 
+                 data-category="{{ report[4] }}" 
+                 data-description="{{ report[5] }}" 
+                 data-date="{{ report[6] }}" 
+                 data-reporter="NIE Campus Finder"
+                 data-contact="{{ report[2] }}{% if report[3] %} • {{ report[3] }}{% endif %}"
+                 {% if report[8] %}data-image="{{ url_for('static', filename='uploads/' + report[8]) }}"{% endif %}>
+          
+          <div class="card-image-wrap">
+            {% if report[8] %}
+              <img src="{{ url_for('static', filename='uploads/' + report[8]) }}" alt="{{ report[1] }}" loading="lazy" />
+            {% else %}
+              <div class="card-image-placeholder">
+                <span style="font-size:1.5rem; font-weight:700;">NIE</span>
+              </div>
+            {% endif %}
+            <span class="card-status-badge status-found">{{ report[7] or 'Found' }}</span>
+          </div>
+
+          <div class="card-body">
+            <span class="category-tag tag-{{ report[4]|lower }}">{{ report[4] }}</span>
+            <h3 class="card-title">{{ report[1] }}</h3>
+            <p class="card-desc">{{ report[5] }}</p>
+
+            <div class="card-meta-list">
+              <div class="card-meta-item">
+                <span class="meta-icon">📅</span>
+                <span>Date Logged: <strong>{{ report[6] }}</strong></span>
+              </div>
+              <div class="card-meta-item">
+                <span class="meta-icon">✉</span>
+                <span>Finder Contact: {{ report[2] }}</span>
+              </div>
+            </div>
+
+            <div class="card-footer-actions">
+              <button type="button" class="btn btn-secondary btn-sm btn-view-detail">
+                <span>View Details</span>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm btn-view-detail">
+                <span>File Claim</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- Items Container: Table View                                               -->
+  <!-- ========================================================================= -->
+  <div id="view-table-container" class="items-table-container" style="display:none;">
+    {% if reports %}
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Preview</th>
+            <th>Designation</th>
+            <th>Classification</th>
+            <th>Date Logged</th>
+            <th>Finder</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for report in reports %}
+            <tr data-name="{{ report[1] }}" 
+                data-category="{{ report[4] }}" 
+                data-description="{{ report[5] }}" 
+                data-date="{{ report[6] }}" 
+                data-reporter="NIE Campus Finder"
+                data-contact="{{ report[2] }}{% if report[3] %} • {{ report[3] }}{% endif %}"
+                {% if report[8] %}data-image="{{ url_for('static', filename='uploads/' + report[8]) }}"{% endif %}>
+              
+              <td>
+                {% if report[8] %}
+                  <img src="{{ url_for('static', filename='uploads/' + report[8]) }}" alt="{{ report[1] }}" class="table-thumb" />
+                {% else %}
+                  <div style="width:44px; height:44px; border-radius:var(--radius-sm); background:var(--slate-100); display:grid; place-items:center; font-weight:700; font-size:0.85rem; color:var(--slate-600);">NIE</div>
+                {% endif %}
+              </td>
+              <td><strong>{{ report[1] }}</strong></td>
+              <td><span class="category-tag tag-{{ report[4]|lower }}">{{ report[4] }}</span></td>
+              <td>{{ report[6] }}</td>
+              <td>{{ report[2] }}</td>
+              <td><span class="card-status-badge status-found" style="position:static; display:inline-block;">Found</span></td>
+              <td>
+                <button type="button" class="btn btn-primary btn-sm btn-view-detail">View &amp; Claim</button>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- Empty State                                                               -->
+  <!-- ========================================================================= -->
+  {% if not reports %}
+    <div class="scout-empty-state">
+      <div class="empty-mascot-stage">
+        <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" alt="NIE Emblem" style="width:70px; height:80px; margin:0 auto;" />
+      </div>
+      <h3>No Matching Records in Registry</h3>
+      <p>
+        No active found items match your current query. You can submit a missing item report to alert campus security desks.
+      </p>
+      <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+        <a href="{{ url_for('report') }}" class="btn btn-primary">
+          <span>Submit Lost Item Report</span>
+        </a>
+        <a href="{{ url_for('reported_items') }}" class="btn btn-secondary">
+          <span>Reset Search</span>
+        </a>
+      </div>
+    </div>
+  {% endif %}
+
 {% endblock %}

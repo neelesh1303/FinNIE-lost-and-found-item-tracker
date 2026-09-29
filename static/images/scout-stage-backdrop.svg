@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="100%" height="100%" class="scout-stage-svg">
+  <defs>
+    <!-- Tech Gradients -->
+    <radialGradient id="radarScanGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(56, 189, 248, 0.18)" />
+      <stop offset="50%" stop-color="rgba(30, 58, 138, 0.06)" />
+      <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
+    </radialGradient>
+    <linearGradient id="techBeamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(56, 189, 248, 0.3)" />
+      <stop offset="70%" stop-color="rgba(37, 99, 235, 0.05)" />
+      <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
+    </linearGradient>
+    <filter id="glassShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Ambient Radar Aura -->
+  <ellipse cx="400" cy="240" rx="360" ry="150" fill="url(#radarScanGlow)" />
+  <ellipse cx="400" cy="385" rx="280" ry="18" fill="rgba(15, 23, 42, 0.05)" />
+
+  <!-- Geometric Tech Grid Circles & Coordinates -->
+  <circle cx="400" cy="240" r="180" fill="none" stroke="#38bdf8" stroke-width="1" stroke-dasharray="6 6" opacity="0.25" />
+  <circle cx="400" cy="240" r="280" fill="none" stroke="#38bdf8" stroke-width="1" stroke-dasharray="12 12" opacity="0.15" />
+  <line x1="120" y1="240" x2="680" y2="240" stroke="#38bdf8" stroke-width="1" stroke-dasharray="4 8" opacity="0.15" />
+  <line x1="400" y1="60" x2="400" y2="400" stroke="#38bdf8" stroke-width="1" stroke-dasharray="4 8" opacity="0.15" />
+
+  <!-- Subtle NIE Shield Crest Silhouette -->
+  <g transform="translate(365, 90) scale(0.24)" opacity="0.06">
+    <path d="M160 12 C230 40 290 32 290 85 C290 220 200 295 160 340 C120 295 30 220 30 85 C30 32 90 40 160 12 Z" fill="#1e3a8a" />
+  </g>
+
+  <!-- Floating Tech Glass Card 1: Keyring -->
+  <g class="floating-item float-item-keys" transform="translate(100, 150)">
+    <rect x="-30" y="-30" width="60" height="60" rx="14" fill="#ffffff" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5" filter="url(#glassShadow)" />
+    <text x="0" y="8" font-size="26" text-anchor="middle">🔑</text>
+    <circle cx="20" cy="-20" r="3" fill="#38bdf8" />
+  </g>
+
+  <!-- Floating Tech Glass Card 2: Smartphone -->
+  <g class="floating-item float-item-phone" transform="translate(700, 140)">
+    <rect x="-30" y="-30" width="60" height="60" rx="14" fill="#ffffff" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5" filter="url(#glassShadow)" />
+    <text x="0" y="8" font-size="26" text-anchor="middle">📱</text>
+    <circle cx="-18" cy="-20" r="3" fill="#2563eb" />
+  </g>
+
+  <!-- Floating Tech Glass Card 3: ID Badge -->
+  <g class="floating-item float-item-id" transform="translate(150, 310)">
+    <rect x="-26" y="-26" width="52" height="52" rx="12" fill="#ffffff" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5" filter="url(#glassShadow)" />
+    <text x="0" y="7" font-size="22" text-anchor="middle">🪪</text>
+  </g>
+
+  <!-- Floating Tech Glass Card 4: Audio / AirPods -->
+  <g class="floating-item float-item-audio" transform="translate(660, 305)">
+    <rect x="-26" y="-26" width="52" height="52" rx="12" fill="#ffffff" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5" filter="url(#glassShadow)" />
+    <text x="0" y="7" font-size="22" text-anchor="middle">🎧</text>
+  </g>
+
+  <!-- Floating Tech Glass Card 5: Glasses -->
+  <g class="floating-item float-item-glasses" transform="translate(390, 60)">
+    <rect x="-24" y="-24" width="48" height="48" rx="10" fill="#ffffff" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5" filter="url(#glassShadow)" />
+    <text x="0" y="6" font-size="20" text-anchor="middle">👓</text>
+  </g>
+
+  <!-- Modern Tech Pulse Nodes -->
+  <g class="stage-nodes">
+    <circle cx="260" cy="100" r="3.5" fill="#38bdf8" opacity="0.6" class="pulse-star-1"/>
+    <circle cx="540" cy="115" r="3.5" fill="#2563eb" opacity="0.6" class="pulse-star-2"/>
+    <circle cx="120" cy="250" r="3" fill="#0284c7" opacity="0.5" class="pulse-star-3"/>
+    <circle cx="690" cy="235" r="3" fill="#38bdf8" opacity="0.5" class="pulse-star-4"/>
+  </g>
+
+  <!-- Precision Scanner Sweep -->
+  <polygon points="560,240 280,380 430,390" fill="url(#techBeamGrad)" class="scanning-search-beam" opacity="0.4" />
+</svg>

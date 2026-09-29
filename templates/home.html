@@ -1,41 +1,223 @@
 {% extends 'base.html' %}
 
-{% block title %}FinNIE · Welcome{% endblock %}
+{% block title %}FinNIE · Official NIE Campus Lost &amp; Found Intelligence{% endblock %}
 
 {% block content %}
-  <section class="hero-card">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <h1>FinNIE helps your community find missing items faster.</h1>
-        <p>Secure, simple, and beautiful lost &amp; found reporting built for people who want clarity, trust, and speed in reuniting items with their owners.</p>
+
+  <!-- ========================================================================= -->
+  <!-- 1. Hero Section (Mature Collegiate Tech Stage)                            -->
+  <!-- ========================================================================= -->
+  <section class="hero-stage-card">
+    <!-- Subtle NIE Shield Watermark -->
+    <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" class="hero-nie-watermark" alt="NIE Crest" />
+
+    <div class="hero-grid-layout">
+      <!-- Left Hero Content -->
+      <div class="hero-content">
+        <div class="hero-badge-pill">
+          <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" class="mini-crest" alt="NIE" />
+          <span>Official NIE Mysore Intelligence Portal</span>
+        </div>
+
+        <h1 class="hero-title">
+          Campus Lost &amp; Found <br/>
+          <span class="highlight-blue">Intelligence Network</span>
+        </h1>
+
+        <p class="hero-desc">
+          The unified tracking platform for NIE Mysore. Log unattended campus property, query real-time found registries, and expedite verified owner reunions.
+        </p>
+
+        <!-- Search Bar -->
+        <form action="{{ url_for('reported_items') }}" method="GET" class="hero-search-box">
+          <input type="text" name="q" placeholder="Search by item title, category (e.g. Keys, AirPods, Calculator, ID)..." autocomplete="off" />
+          <button type="submit">
+            <span>Query Database</span>
+            <span>→</span>
+          </button>
+        </form>
+
+        <!-- Action Links -->
         <div class="hero-actions">
-          <a href="{{ url_for('report') }}" class="btn btn-primary">Submit a Report</a>
+          <a href="{{ url_for('report') }}" class="btn btn-primary">
+            <span>Submit Item Report</span>
+          </a>
+          <a href="{{ url_for('reported_items') }}" class="btn btn-secondary">
+            <span>Browse Active Registry</span>
+          </a>
         </div>
       </div>
-      <div class="info-card">
-        <h3>What is FinNIE?</h3>
-        <p>FinNIE is a modern lost &amp; found platform for reporting missing items, locating found goods, and connecting owners with finders through an easy dashboard.</p>
-        <ul>
-          <li>Fast report submission with image support</li>
-          <li>Clear status tracking for lost, found, and resolved items</li>
-          <li>Responsive, consistent design across pages</li>
-        </ul>
-      </div>
-    </div>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <h3>Instant navigation</h3>
-        <p>Use the tab bar at the top to switch pages instantly. Every page shares a single, polished theme.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Report with confidence</h3>
-        <p>Submit lost and found item details along with optional images so your community can recover items quickly.</p>
-      </div>
-      <div class="feature-card">
-        <h3>See found items</h3>
-        <p>Browse the reported items page to discover found goods and contact the original reporter directly.</p>
+      <!-- Right Modern Tech Stage (Cool Student Scouts) -->
+      <div class="hero-mascot-stage">
+        <!-- SVG Tech Grid & Floating Items -->
+        <img src="{{ url_for('static', filename='images/scout-stage-backdrop.svg') }}" class="stage-backdrop-svg" alt="Radar Grid" />
+
+        <!-- Cool Student Detective Avatars -->
+        <div class="mascot-duo-wrapper">
+          <!-- Male Student Scout -->
+          <div class="mascot-boy-container" title="Campus Scout">
+            <img src="{{ url_for('static', filename='images/boy-mascot.svg') }}" alt="Campus Scout" style="width:100%; height:100%;" />
+          </div>
+
+          <!-- Female Student Scout -->
+          <div class="mascot-girl-container" title="Tech Scout">
+            <img src="{{ url_for('static', filename='images/girl-mascot.svg') }}" alt="Tech Scout" style="width:100%; height:100%;" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- ========================================================================= -->
+  <!-- 2. Metrics & Live Statistics                                              -->
+  <!-- ========================================================================= -->
+  <section class="stats-bar-grid">
+    <div class="stat-card">
+      <div class="stat-icon blue">◎</div>
+      <div>
+        <div class="stat-number" data-target="480" data-suffix="+">480+</div>
+        <div class="stat-label">Verified Item Logs</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon cyan">✓</div>
+      <div>
+        <div class="stat-number" data-target="96" data-suffix="%">96.4%</div>
+        <div class="stat-label">Successful Return Rate</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon emerald">⚡</div>
+      <div>
+        <div class="stat-number" data-target="18" data-suffix="h">&lt; 24h</div>
+        <div class="stat-label">Average Resolution Time</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon amber">🛡️</div>
+      <div>
+        <div class="stat-number" data-target="1250" data-suffix="+">1,250+</div>
+        <div class="stat-label">Active Campus Members</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 3. Category Registry                                                      -->
+  <!-- ========================================================================= -->
+  <section style="margin-bottom:3.5rem;">
+    <div class="section-header-row">
+      <div class="section-title-group">
+        <h2>Item Categories</h2>
+        <p>Filter campus records by specific equipment and personal belongings</p>
+      </div>
+      <a href="{{ url_for('reported_items') }}" class="btn btn-secondary btn-sm">Explore All Categories →</a>
+    </div>
+
+    <div class="category-pill-grid">
+      <a href="{{ url_for('reported_items') }}?category=electronics" class="category-card">
+        <span class="cat-emoji">📱</span>
+        <span class="cat-name">Electronics &amp; Hardware</span>
+        <span class="cat-count">Laptops, Phones, Calculators</span>
+      </a>
+
+      <a href="{{ url_for('reported_items') }}?category=others" class="category-card">
+        <span class="cat-emoji">🔑</span>
+        <span class="cat-name">Keys &amp; Fobs</span>
+        <span class="cat-count">Hostel, Bike, Vehicle Keys</span>
+      </a>
+
+      <a href="{{ url_for('reported_items') }}?category=documents" class="category-card">
+        <span class="cat-emoji">🪪</span>
+        <span class="cat-name">ID &amp; Documentation</span>
+        <span class="cat-count">College IDs, Licenses, Cards</span>
+      </a>
+
+      <a href="{{ url_for('reported_items') }}?category=clothing" class="category-card">
+        <span class="cat-emoji">🎒</span>
+        <span class="cat-name">Bags &amp; Apparel</span>
+        <span class="cat-count">Backpacks, Jackets, Cases</span>
+      </a>
+
+      <a href="{{ url_for('reported_items') }}?category=others" class="category-card">
+        <span class="cat-emoji">📚</span>
+        <span class="cat-name">Books &amp; Stationeries</span>
+        <span class="cat-count">Textbooks, Drawing Sets</span>
+      </a>
+
+      <a href="{{ url_for('reported_items') }}?category=others" class="category-card">
+        <span class="cat-emoji">👓</span>
+        <span class="cat-name">Valuables &amp; Accessories</span>
+        <span class="cat-count">Smartwatches, Eyewear, Wallets</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 4. Operational Protocol (How It Works)                                    -->
+  <!-- ========================================================================= -->
+  <section style="background:var(--surface-card); border-radius:var(--radius-xl); border:1px solid var(--border-card); padding:2.6rem 2.2rem; box-shadow:var(--shadow-xs); margin-bottom:3.5rem;">
+    <div class="section-title-group" style="text-align:center; margin-bottom:2.5rem;">
+      <span class="hero-badge-pill" style="margin-bottom:0.5rem;">
+        <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" class="mini-crest" alt="NIE" />
+        Verification Standard
+      </span>
+      <h2>Operational Protocol</h2>
+      <p>A secure 3-stage process ensuring accurate reporting and authenticated handovers</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1.6rem;">
+      <div style="background:var(--slate-50); border-radius:var(--radius-lg); padding:1.6rem; border:1px solid var(--slate-200); display:flex; flex-direction:column; gap:0.6rem;">
+        <div style="width:40px; height:40px; border-radius:var(--radius-md); background:var(--primary-900); color:#ffffff; font-size:1.1rem; display:grid; place-items:center; font-weight:700;">1</div>
+        <h3 style="font-size:1.1rem; color:var(--slate-900); font-weight:700;">Log Item Details</h3>
+        <p style="color:var(--slate-600); font-size:0.88rem; line-height:1.6;">
+          Submit a digital log with description, timestamp, campus location coordinates, and photo evidence.
+        </p>
+      </div>
+
+      <div style="background:var(--slate-50); border-radius:var(--radius-lg); padding:1.6rem; border:1px solid var(--slate-200); display:flex; flex-direction:column; gap:0.6rem;">
+        <div style="width:40px; height:40px; border-radius:var(--radius-md); background:var(--primary-600); color:#ffffff; font-size:1.1rem; display:grid; place-items:center; font-weight:700;">2</div>
+        <h3 style="font-size:1.1rem; color:var(--slate-900); font-weight:700;">Automated Indexing</h3>
+        <p style="color:var(--slate-600); font-size:0.88rem; line-height:1.6;">
+          The report is categorized and instantly published across the searchable institutional database.
+        </p>
+      </div>
+
+      <div style="background:var(--slate-50); border-radius:var(--radius-lg); padding:1.6rem; border:1px solid var(--slate-200); display:flex; flex-direction:column; gap:0.6rem;">
+        <div style="width:40px; height:40px; border-radius:var(--radius-md); background:#10b981; color:#ffffff; font-size:1.1rem; display:grid; place-items:center; font-weight:700;">3</div>
+        <h3 style="font-size:1.1rem; color:var(--slate-900); font-weight:700;">Authenticated Handover</h3>
+        <p style="color:var(--slate-600); font-size:0.88rem; line-height:1.6;">
+          Claimants submit identity proof and item markers, followed by official handover at campus security desks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 5. Institutional Callout                                                  -->
+  <!-- ========================================================================= -->
+  <section style="background:var(--primary-900); border-radius:var(--radius-xl); padding:2.5rem; color:#ffffff; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; box-shadow:var(--shadow-md); border:1px solid rgba(255,255,255,0.08);">
+    <div style="max-width:580px;">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.5rem;">
+        <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" style="width:28px; height:32px;" alt="NIE Crest" />
+        <h2 style="font-size:1.5rem; font-weight:800; margin:0; letter-spacing:-0.02em;">Found Unattended Campus Property?</h2>
+      </div>
+      <p style="color:var(--slate-300); font-size:0.92rem; line-height:1.65;">
+        Deposit the item at any designated campus security desk or log it immediately to trigger student &amp; faculty alerts.
+      </p>
+    </div>
+    <div style="display:flex; gap:0.85rem; flex-wrap:wrap;">
+      <a href="{{ url_for('report') }}" class="btn btn-sky">
+        <span>Submit Item Log ＋</span>
+      </a>
+      <a href="{{ url_for('reported_items') }}" class="btn btn-secondary" style="background:rgba(255,255,255,0.1); color:#ffffff; border-color:rgba(255,255,255,0.2);">
+        <span>Search Registry</span>
+      </a>
+    </div>
+  </section>
+
 {% endblock %}

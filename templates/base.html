@@ -3,33 +3,216 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}FinNIE{% endblock %}</title>
+  <title>{% block title %}FinNIE · NIE Campus Lost &amp; Found Intelligence{% endblock %}</title>
+  
+  <!-- Modern Clean Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  {% block extra_head %}{% endblock %}
 </head>
 <body>
+
+  <!-- Top Navigation Header with Sleek Midnight Glass & NIE Crest -->
   <header class="app-header">
-    <div class="brand">
-      <div class="brand-mark">F</div>
-      <div>
-        <div class="brand-name">FinNIE</div>
-        <div class="brand-tag">Find, Identify, Notify, Inform, Engage</div>
+    <div class="header-top-bar">
+      <div class="brand-wrapper">
+        <a href="{{ url_for('home') }}" style="display:flex; align-items:center; gap:0.9rem;">
+          <!-- Official NIE Shield Crest -->
+          <div class="nie-crest-badge" title="The National Institute of Engineering">
+            <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" alt="NIE Emblem" style="width:100%; height:100%;" />
+          </div>
+          <div>
+            <div class="brand-title">
+              FinNIE <span class="badge-sparkle">Lost &amp; Found</span>
+            </div>
+            <div class="brand-subtitle">The National Institute of Engineering · Mysore</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="header-user-status">
+        <div class="user-badge">
+          <span class="status-dot"></span>
+          <span>Campus Active</span>
+        </div>
+        <span style="opacity:0.4;">|</span>
+        <span>NIE Network: <strong>Live</strong></span>
       </div>
     </div>
-    <nav class="site-nav">
-      <a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a>
-      <a href="{{ url_for('report') }}" class="{% if request.endpoint == 'report' %}active{% endif %}">Report Item</a>
-      <a href="{{ url_for('reported_items') }}" class="{% if request.endpoint == 'reported_items' %}active{% endif %}">Reported Items</a>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tab-strip">
+      <a href="{{ url_for('home') }}" class="nav-tab {% if request.endpoint == 'home' %}active{% endif %}">
+        <span class="tab-icon">◈</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="{{ url_for('reported_items') }}" class="nav-tab {% if request.endpoint == 'reported_items' %}active{% endif %}">
+        <span class="tab-icon">◎</span>
+        <span>Found Items Registry</span>
+        <span class="tab-counter">Live</span>
+      </a>
+      <a href="{{ url_for('report') }}" class="nav-tab {% if request.endpoint == 'report' %}active{% endif %}">
+        <span class="tab-icon">＋</span>
+        <span>Submit Report</span>
+      </a>
     </nav>
   </header>
 
-  <main class="main-content">
+  <!-- Main Content Body -->
+  <main class="main-container">
     {% block content %}{% endblock %}
   </main>
 
+  <!-- Minimalist Tech Companion Widget -->
+  <div class="scout-companion-widget" id="scout-companion-widget" title="NIE Campus Intelligence">
+    <div class="scout-speech-bubble" id="scout-speech-bubble">
+      <div class="scout-bubble-header">
+        <span>Campus Scout Network</span>
+        <span class="scout-bubble-close" id="scout-bubble-close">&times;</span>
+      </div>
+      <p id="scout-speech-text">Need assistance tracking a lost item on campus? Filter by category or submit a detailed log.</p>
+    </div>
+    <div class="scout-avatar-button">
+      <img src="{{ url_for('static', filename='images/mascot_pair.jpg') }}" alt="Scout Avatar" />
+      <span class="scout-avatar-badge">?</span>
+    </div>
+  </div>
+
+  <!-- Item Details & Verification Modal -->
+  <div class="modal-overlay" id="item-detail-modal">
+    <div class="modal-dialog">
+      <div class="modal-top-bar">
+        <h3><span>🛡️</span> Item Details &amp; Verification Protocol</h3>
+        <button type="button" class="modal-close-icon btn-close-modal" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-content-grid">
+        <!-- Item Properties Table -->
+        <div>
+          <table class="modal-details-table">
+            <tbody>
+              <tr>
+                <td class="label-cell">Item Designation</td>
+                <td id="modal-item-name">House Keys with Ring</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Category</td>
+                <td id="modal-item-category">Personal Belongings</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Found Location</td>
+                <td id="modal-item-location">NIE Central Library 2nd Floor</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Date Logged</td>
+                <td id="modal-item-date">2026-09-29</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Finder Contact</td>
+                <td id="modal-item-contact">reporter@nie.ac.in</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Description</td>
+                <td id="modal-item-desc">Found near reading desk. Metallic keyring with keys.</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Logged By</td>
+                <td id="modal-item-reporter">NIE Campus Member</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Item Image Photo Preview -->
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <img id="modal-item-image" class="modal-image-preview" src="{{ url_for('static', filename='uploads/sg.jpg') }}" alt="Item Photo" />
+          <div style="background:var(--slate-50); padding:0.85rem; border-radius:var(--radius-md); font-size:0.8rem; color:var(--slate-600); border:1px solid var(--border-card);">
+            <strong>Verification Protocol:</strong> Please provide proof of ownership (serial number, distinctive markings, or purchase/student record) when filing a claim.
+          </div>
+        </div>
+      </div>
+
+      <!-- Claim Submission Form in Modal -->
+      <div class="modal-claims-section">
+        <h4>File Ownership Claim</h4>
+        <form id="modal-claim-form" style="display:grid; gap:0.85rem;">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+            <input type="text" placeholder="Full Name" required style="padding:0.7rem 0.95rem; border-radius:var(--radius-md); border:1px solid var(--border-card); font-size:0.9rem;" />
+            <input type="email" placeholder="@nie.ac.in Institutional Email" required style="padding:0.7rem 0.95rem; border-radius:var(--radius-md); border:1px solid var(--border-card); font-size:0.9rem;" />
+          </div>
+          <textarea rows="2" placeholder="Specify unique identifying markers, engravings, or password unlock proof..." required style="padding:0.7rem 0.95rem; border-radius:var(--radius-md); border:1px solid var(--border-card); font-size:0.9rem;"></textarea>
+          <div style="display:flex; justify-content:flex-end; gap:0.75rem;">
+            <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Submit Ownership Claim</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Institutional Footer -->
   <footer class="site-footer">
-    <p>FinNIE &copy; 2026 | Trusted lost &amp; found reporting.</p>
+    <div class="footer-inner-grid">
+      <div class="footer-col">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.9rem;">
+          <div style="width:34px; height:40px; flex-shrink:0;">
+            <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" alt="NIE Crest" style="width:100%; height:100%;" />
+          </div>
+          <div class="brand-title" style="color:#ffffff; font-size:1.15rem;">
+            FinNIE <span class="badge-sparkle">Network</span>
+          </div>
+        </div>
+        <p style="color:var(--slate-400); font-size:0.85rem; line-height:1.65;">
+          The official digital lost and found tracking platform of The National Institute of Engineering, connecting campus vigilance with verified recoveries.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="{{ url_for('home') }}">Campus Dashboard</a></li>
+          <li><a href="{{ url_for('reported_items') }}">Found Items Registry</a></li>
+          <li><a href="{{ url_for('report') }}">Submit Item Report</a></li>
+          <li><a href="{{ url_for('reported_items') }}?category=electronics">Electronics &amp; Hardware</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Designated Drop-offs</h4>
+        <ul class="footer-links">
+          <li><a href="#">Administrative Main Block</a></li>
+          <li><a href="#">Central Library Reception</a></li>
+          <li><a href="#">Golden Jubilee Bhavan Desk</a></li>
+          <li><a href="#">Campus Security Headquarters</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Campus Support</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:lostandfound@nie.ac.in">lostandfound@nie.ac.in</a></li>
+          <li><a href="tel:+918212480475">+91 821 248 0475</a></li>
+          <li><a href="#">Mon – Sat: 09:00 – 17:30</a></li>
+          <li><a href="#">Campus Safety Protocol</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <div>&copy; 2026 The National Institute of Engineering (NIE). All rights reserved.</div>
+      <div>Manandavadi Road, Mysuru, Karnataka 570008</div>
+    </div>
   </footer>
 
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

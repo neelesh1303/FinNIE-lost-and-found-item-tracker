@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" width="100%" height="100%" class="nie-crest-svg">
+  <defs>
+    <linearGradient id="shieldBgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f0f7ff" />
+    </linearGradient>
+    <linearGradient id="nieNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#0f2766" />
+    </linearGradient>
+    <filter id="subtleDrop" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#1e3a8a" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <!-- Outer Shield Outline -->
+  <path d="M160 12 C230 40 290 32 290 85 C290 220 200 295 160 340 C120 295 30 220 30 85 C30 32 90 40 160 12 Z" 
+        fill="url(#shieldBgGrad)" stroke="#1e3a8a" stroke-width="12" stroke-linejoin="round" filter="url(#subtleDrop)" />
+  
+  <!-- Inner Shield Border -->
+  <path d="M160 26 C220 50 274 44 274 90 C274 210 192 280 160 322 C128 280 46 210 46 90 C46 44 100 50 160 26 Z" 
+        fill="none" stroke="#1e3a8a" stroke-width="3" opacity="0.4" />
+
+  <!-- 3 Stars on Top -->
+  <!-- Center Top Star -->
+  <path d="M160 38 L163.5 48.5 L174.5 48.5 L165.5 55 L169 65.5 L160 59 L151 65.5 L154.5 55 L145.5 48.5 L156.5 48.5 Z" fill="#1e3a8a" />
+  <!-- Left Star -->
+  <path d="M78 72 L80.8 80.5 L89.6 80.5 L82.5 85.7 L85.2 94.1 L78 88.9 L70.8 94.1 L73.5 85.7 L66.4 80.5 L75.2 80.5 Z" fill="#1e3a8a" />
+  <!-- Right Star -->
+  <path d="M242 72 L244.8 80.5 L253.6 80.5 L246.5 85.7 L249.2 94.1 L242 88.9 L234.8 94.1 L237.5 85.7 L230.4 80.5 L239.2 80.5 Z" fill="#1e3a8a" />
+
+  <!-- Red Center Gear / Cogwheel -->
+  <g class="nie-gear-group" transform="translate(160, 155)">
+    <!-- 16 Teeth Cog -->
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(22.5)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(45)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(67.5)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(90)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(112.5)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(135)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(157.5)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(180)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(202.5)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(225)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(247.5)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(270)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(292.5)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(315)" />
+    <path d="M -16 -68 L 16 -68 L 12 -52 L -12 -52 Z" fill="#dc2626" transform="rotate(337.5)" />
+
+    <!-- Gear Body Ring -->
+    <circle cx="0" cy="0" r="54" fill="#dc2626" />
+
+    <!-- Inner Blue Horizon Disc -->
+    <circle cx="0" cy="0" r="42" fill="#bae6fd" stroke="#1e3a8a" stroke-width="4" />
+
+    <!-- Power Grid Tower & Suspension Bridge Silhouette -->
+    <!-- Tower -->
+    <path d="M 0 -28 L -6 10 L 6 10 Z" fill="none" stroke="#1e3a8a" stroke-width="1.8" />
+    <line x1="-12" y1="-18" x2="12" y2="-18" stroke="#1e3a8a" stroke-width="1.5" />
+    <line x1="-15" y1="-10" x2="15" y2="-10" stroke="#1e3a8a" stroke-width="1.5" />
+    <line x1="-10" y1="-2" x2="10" y2="-2" stroke="#1e3a8a" stroke-width="1.5" />
+    
+    <!-- Mini Secondary Tower -->
+    <path d="M -18 -8 L -22 10 L -14 10 Z" fill="none" stroke="#1e3a8a" stroke-width="1.4" />
+
+    <!-- Suspension Bridge Cables & Deck -->
+    <path d="M -40 10 Q 0 -6 40 10" fill="none" stroke="#1e3a8a" stroke-width="2.5" />
+    <line x1="-40" y1="10" x2="40" y2="10" stroke="#1e3a8a" stroke-width="3" />
+    <!-- Vertical Bridge Cables -->
+    <line x1="-30" y1="7" x2="-30" y2="10" stroke="#1e3a8a" stroke-width="1.2" />
+    <line x1="-20" y1="2" x2="-20" y2="10" stroke="#1e3a8a" stroke-width="1.2" />
+    <line x1="-10" y1="-1" x2="-10" y2="10" stroke="#1e3a8a" stroke-width="1.2" />
+    <line x1="10" y1="-1" x2="10" y2="10" stroke="#1e3a8a" stroke-width="1.2" />
+    <line x1="20" y1="2" x2="20" y2="10" stroke="#1e3a8a" stroke-width="1.2" />
+    <line x1="30" y1="7" x2="30" y2="10" stroke="#1e3a8a" stroke-width="1.2" />
+
+    <!-- River Waves -->
+    <path d="M -34 20 Q -24 16 -14 20 Q -4 24 6 20 Q 16 16 26 20 Q 34 24 38 20" fill="none" stroke="#0284c7" stroke-width="1.8" stroke-linecap="round" />
+    <path d="M -26 28 Q -16 25 -6 28 Q 4 31 14 28 Q 24 25 30 28" fill="none" stroke="#0284c7" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <!-- "NIE" Typography at Bottom -->
+  <g class="nie-letters-group" fill="#1e3a8a">
+    <!-- N -->
+    <path d="M 96 230 L 114 230 L 128 275 L 128 230 L 142 230 L 142 295 L 125 295 L 110 248 L 110 295 L 96 295 Z" />
+    <!-- I -->
+    <path d="M 152 238 L 168 238 L 168 308 L 152 308 Z" />
+    <!-- E -->
+    <path d="M 178 230 L 222 230 L 222 244 L 194 244 L 194 256 L 218 256 L 218 270 L 194 270 L 194 282 L 224 282 L 224 296 L 178 296 Z" />
+  </g>
+</svg>

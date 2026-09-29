@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="100%" height="100%" class="mascot-svg mascot-boy-svg">
+  <defs>
+    <!-- Cool Tech Blue & Slate Gradients -->
+    <linearGradient id="holoBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="50%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <linearGradient id="jacketNavyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="hoodieTealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+    <linearGradient id="coolHairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="skinToneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffedd5" />
+      <stop offset="100%" stop-color="#fed7aa" />
+    </linearGradient>
+    <filter id="holoGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Cool Holographic Beacon / Question Mark -->
+  <g class="animated-question-mark" transform="translate(195, 42)">
+    <!-- Tech Hologram Rings -->
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.4" class="holo-ring"/>
+    <circle cx="0" cy="0" r="18" fill="rgba(56, 189, 248, 0.08)" />
+    <!-- Sleek Tech Question Mark -->
+    <path d="M-10 -24 C-10 -36 10 -36 10 -24 C10 -14 -3 -10 -3 2" fill="none" stroke="url(#holoBlueGrad)" stroke-width="5.5" stroke-linecap="round" filter="url(#holoGlow)" />
+    <circle cx="-3" cy="12" r="3.5" fill="#38bdf8" filter="url(#holoGlow)" />
+  </g>
+
+  <!-- Character Group: Cool College Scout (Guy) -->
+  <g class="boy-character-group">
+    <!-- Headphones Around Neck -->
+    <g class="headphones-neck" transform="translate(200, 275)">
+      <path d="M-45 -10 C-45 28 45 28 45 -10" fill="none" stroke="#334155" stroke-width="9" stroke-linecap="round" />
+      <!-- Left Ear Cup -->
+      <rect x="-56" y="-22" width="16" height="26" rx="8" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5" />
+      <!-- Right Ear Cup -->
+      <rect x="40" y="-22" width="16" height="26" rx="8" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5" />
+    </g>
+
+    <!-- Neck -->
+    <rect x="188" y="248" width="24" height="28" rx="6" fill="#fbcfe8" fill-opacity="0.3" fill="url(#skinToneGrad)" />
+
+    <!-- Stylish College Jacket & Hoodie -->
+    <path d="M135 285 C135 268 165 260 200 260 C235 260 265 268 265 285 L275 440 C275 455 245 465 200 465 C155 465 125 455 125 440 Z" fill="url(#jacketNavyGrad)" />
+    <!-- Inner Teal Hoodie Collar -->
+    <path d="M172 260 L200 310 L228 260" fill="url(#hoodieTealGrad)" />
+    <path d="M188 260 L200 288 L212 260" fill="#0f172a" />
+
+    <!-- NIE Crest Enamel Lapel Pin -->
+    <g transform="translate(155, 305) scale(0.065)">
+      <path d="M160 12 C230 40 290 32 290 85 C290 220 200 295 160 340 C120 295 30 220 30 85 C30 32 90 40 160 12 Z" fill="#ffffff" stroke="#38bdf8" stroke-width="14" />
+      <circle cx="160" cy="155" r="48" fill="#dc2626" />
+      <circle cx="160" cy="155" r="34" fill="#1e3a8a" />
+    </g>
+
+    <!-- Head & Face -->
+    <g class="boy-head">
+      <!-- Head Base -->
+      <ellipse cx="200" cy="195" rx="54" ry="58" fill="url(#skinToneGrad)" />
+      
+      <!-- Ears -->
+      <ellipse cx="144" cy="198" rx="8" ry="12" fill="#fed7aa" />
+      <ellipse cx="256" cy="198" rx="8" ry="12" fill="#fed7aa" />
+
+      <!-- Sharp Eyebrows -->
+      <path d="M162 172 Q176 166 188 174" fill="none" stroke="#1e293b" stroke-width="3.5" stroke-linecap="round" />
+      <path d="M212 174 Q224 166 238 172" fill="none" stroke="#1e293b" stroke-width="3.5" stroke-linecap="round" />
+
+      <!-- Confident, Smart Eyes -->
+      <g class="boy-eyes">
+        <!-- Left Eye -->
+        <ellipse cx="175" cy="188" rx="11" ry="12" fill="#ffffff" />
+        <g class="pupil-left">
+          <circle cx="176" cy="188" r="6.5" fill="#0f172a" />
+          <circle cx="174" cy="185" r="2.8" fill="#38bdf8" />
+          <circle cx="177" cy="189" r="1.2" fill="#ffffff" />
+        </g>
+        <!-- Left Eyelid Line -->
+        <path d="M163 182 Q175 178 187 183" fill="none" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round" />
+
+        <!-- Right Eye -->
+        <ellipse cx="225" cy="188" rx="11" ry="12" fill="#ffffff" />
+        <g class="pupil-right">
+          <circle cx="224" cy="188" r="6.5" fill="#0f172a" />
+          <circle cx="222" cy="185" r="2.8" fill="#38bdf8" />
+          <circle cx="225" cy="189" r="1.2" fill="#ffffff" />
+        </g>
+        <!-- Right Eyelid Line -->
+        <path d="M213 183 Q225 178 237 182" fill="none" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round" />
+      </g>
+
+      <!-- Nose -->
+      <path d="M198 200 L202 206 L197 207" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+
+      <!-- Confident Half Smile -->
+      <path d="M192 222 Q202 228 214 220" fill="none" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round" />
+
+      <!-- Modern Textured Wavy Hair -->
+      <g class="boy-hair">
+        <path d="M142 170 C136 125 160 100 198 98 C232 98 258 112 264 145 C268 165 264 182 260 186 C252 165 244 154 230 152 C216 150 206 162 192 152 C178 142 168 152 154 158 C145 162 144 166 142 170 Z" fill="url(#coolHairGrad)" />
+        <path d="M185 102 Q198 84 212 96" fill="none" stroke="url(#coolHairGrad)" stroke-width="12" stroke-linecap="round"/>
+        <path d="M165 110 Q176 92 190 106" fill="none" stroke="url(#coolHairGrad)" stroke-width="10" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <!-- Left Arm Holding Digital Device -->
+    <g class="boy-device-arm">
+      <path d="M142 295 Q150 350 180 345" fill="none" stroke="url(#jacketNavyGrad)" stroke-width="16" stroke-linecap="round" />
+      <!-- Stylized Tablet / Smart Scanner -->
+      <rect x="175" y="325" width="34" height="48" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="2" transform="rotate(-15 175 325)" />
+      <rect x="180" y="331" width="24" height="34" rx="3" fill="#0284c7" opacity="0.75" transform="rotate(-15 175 325)" />
+    </g>
+
+    <!-- Right Arm -->
+    <g class="boy-arm-right">
+      <path d="M258 295 Q274 340 252 355" fill="none" stroke="url(#jacketNavyGrad)" stroke-width="14" stroke-linecap="round" />
+      <circle cx="248" cy="355" r="7" fill="#fed7aa" />
+    </g>
+  </g>
+</svg>

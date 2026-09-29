@@ -1,67 +1,212 @@
 {% extends 'base.html' %}
 
-{% block title %}FinNIE · Report Item{% endblock %}
+{% block title %}FinNIE · Submit Official Item Log{% endblock %}
 
 {% block content %}
-  <section class="page-card form-panel">
-    <div class="section-heading">
-      <h2>Submit a lost or found report</h2>
+
+  <div class="report-page-grid">
+    <!-- ======================================================================= -->
+    <!-- Left Column: Report Submission Form                                     -->
+    <!-- ======================================================================= -->
+    <div class="form-card-panel report-form-container">
+      <div class="form-header-badge">
+        <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" style="width:13px; height:15px;" alt="NIE" />
+        <span>Official NIE Registry Protocol</span>
+      </div>
+
+      <h2>Submit Item Report</h2>
+      <p class="form-subtitle">
+        Document lost or discovered campus property. Completed fields will update the real-time preview card on the right.
+      </p>
+
+      <!-- Form Completion Progress Meter -->
+      <div class="form-progress-box">
+        <div class="form-progress-header">
+          <span>Documentation Status</span>
+          <span id="form-progress-percent">15% Complete</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="form-progress-fill"></div>
+        </div>
+      </div>
+
+      <form action="{{ url_for('submit') }}" method="POST" enctype="multipart/form-data">
+        <!-- Name -->
+        <div class="form-group">
+          <label for="name">
+            <span>Item Designation / Title <span class="required-star">*</span></span>
+          </label>
+          <input type="text" id="name" name="name" placeholder="e.g. Scientific Calculator FX-991EX / Keyring Set" required autocomplete="off" />
+        </div>
+
+        <!-- Email & Phone Grid -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label for="email">
+              <span>Institutional Email <span class="required-star">*</span></span>
+            </label>
+            <input type="email" id="email" name="email" placeholder="username@nie.ac.in" pattern=".+@nie\.ac\.in$" title="Please use a valid @nie.ac.in institutional email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">
+              <span>Contact Number <span class="required-star">*</span></span>
+            </label>
+            <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required />
+          </div>
+        </div>
+
+        <!-- Category & Status Grid -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label for="category">
+              <span>Classification Category <span class="required-star">*</span></span>
+            </label>
+            <select id="category" name="category" required>
+              <option value="">Select Classification...</option>
+              <option value="electronics">Electronics &amp; Hardware</option>
+              <option value="documents">ID Cards &amp; Documentation</option>
+              <option value="clothing">Bags &amp; Apparel</option>
+              <option value="others">Keys, Valuables &amp; Others</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="status">
+              <span>Status Designation <span class="required-star">*</span></span>
+            </label>
+            <select id="status" name="status" required>
+              <option value="found" selected>Found Item (In Finder's Custody)</option>
+              <option value="lost">Lost Item (Looking for Item)</option>
+              <option value="resolved">Resolved / Claim Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Location with Quick Tags -->
+        <div class="form-group">
+          <label for="location">
+            <span>Campus Location / Building</span>
+          </label>
+          <input type="text" id="location" name="location" placeholder="e.g. Central Library 2nd Floor Reading Hall" />
+          <div class="location-chips-row">
+            <span class="location-chip" data-location="Central Library">Central Library</span>
+            <span class="location-chip" data-location="Administrative Block">Admin Block</span>
+            <span class="location-chip" data-location="Golden Jubilee Bhavan">GJ Bhavan</span>
+            <span class="location-chip" data-location="Campus Cafeteria">Campus Cafeteria</span>
+            <span class="location-chip" data-location="Sports Pavilion">Sports Pavilion</span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description">
+            <span>Detailed Physical Description <span class="required-star">*</span></span>
+          </label>
+          <textarea id="description" name="description" rows="3" placeholder="Provide distinct characteristics, color markings, brand, stickers, or notable condition..." required></textarea>
+        </div>
+
+        <!-- Reported Date -->
+        <div class="form-group">
+          <label for="reportedDate">
+            <span>Incident / Found Date <span class="required-star">*</span></span>
+          </label>
+          <input type="date" id="reportedDate" name="reportedDate" required />
+        </div>
+
+        <!-- Image Upload Drag & Drop Box -->
+        <div class="form-group">
+          <label for="image">
+            <span>Attach Evidence / Item Image (Recommended)</span>
+          </label>
+          <div class="file-upload-box">
+            <input type="file" id="image" name="image" accept="image/*" />
+            <div class="upload-icon-circle">📷</div>
+            <p style="font-weight:600; color:var(--slate-800); font-size:0.92rem; margin-bottom:0.15rem;">Drop image file here, or click to upload</p>
+            <p style="font-size:0.78rem; color:var(--slate-500);">Supported formats: PNG, JPG, WEBP (Max 10MB)</p>
+            <img id="image-preview" class="upload-preview-thumb" alt="Upload Preview" />
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary" style="width:100%; padding:0.85rem; font-size:0.95rem; margin-top:0.8rem;">
+          <span>Submit Official Report</span>
+        </button>
+      </form>
     </div>
-    <p>Tell us what happened and attach a photo if available. We will route your report to the community for a faster reunion.</p>
-    <form action="{{ url_for('submit') }}" method="POST" enctype="multipart/form-data">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" name="name" placeholder="Jane Doe" required />
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="@nie.ac.in" pattern=".+@nie\.ac\.in$" title="Use a valid @nie.ac.in email address" required />
+    <!-- ======================================================================= -->
+    <!-- Right Column: Live Dynamic Preview Card & Helper                        -->
+    <!-- ======================================================================= -->
+    <div class="preview-card-sticky">
+      <div class="preview-card-wrapper">
+        <div class="preview-card-header">
+          <div style="display:flex; align-items:center; gap:0.45rem;">
+            <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" style="width:14px; height:16px;" alt="NIE" />
+            <span>Real-Time Registry Preview</span>
+          </div>
+          <span style="font-size:0.7rem; background:rgba(255,255,255,0.15); padding:0.15rem 0.5rem; border-radius:var(--radius-full);">Live</span>
+        </div>
 
-      <label for="phone">Phone</label>
-      <input type="tel" id="phone" name="phone" placeholder="+91" required />
+        <!-- Realtime Card Simulation -->
+        <div class="report-card" style="margin:0; border:none; border-radius:0;">
+          <div class="card-image-wrap">
+            <div id="prev-image-placeholder" class="card-image-placeholder">
+              <span style="font-size:1.8rem; font-weight:700; color:var(--slate-400);">NIE</span>
+            </div>
+            <img id="prev-image" src="" alt="Live Preview" style="display:none;" />
+            <span id="prev-status" class="card-status-badge status-found">Found</span>
+          </div>
 
-      <label for="category">Category</label>
-      <select id="category" name="category" required>
-        <option value="">Select category</option>
-        <option value="electronics">Electronics</option>
-        <option value="documents">Documents</option>
-        <option value="clothing">Clothing</option>
-        <option value="others">Others</option>
-      </select>
+          <div class="card-body">
+            <span id="prev-category" class="category-tag">Classification</span>
+            <h3 id="prev-title" class="card-title">Item Title Here</h3>
+            <p id="prev-desc" class="card-desc">
+              Description and specific location markers will appear here in real-time...
+            </p>
 
-      <label for="description">Item Description</label>
-      <textarea id="description" name="description" rows="4" placeholder="Describe the item and where it was lost or found." required></textarea>
+            <div class="card-meta-list">
+              <div class="card-meta-item">
+                <span class="meta-icon">📍</span>
+                <span id="prev-location">Campus Location</span>
+              </div>
+              <div class="card-meta-item">
+                <span class="meta-icon">📅</span>
+                <span id="prev-date">Today</span>
+              </div>
+              <div class="card-meta-item">
+                <span class="meta-icon">✉</span>
+                <span id="prev-contact">reporter@nie.ac.in</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <label for="reportedDate">Date Reported</label>
-      <input type="date" id="reportedDate" name="reportedDate" required />
+      <!-- Mascot Tip Helper -->
+      <div class="preview-mascot-helper">
+        <div class="mini-mascot-avatar">◎</div>
+        <div>
+          <strong style="color:var(--slate-900); font-size:0.82rem;">Intelligence Tip:</strong>
+          <p id="preview-mascot-tip" style="color:var(--slate-600); font-size:0.78rem; margin:0;">
+            Provide exact details or unique markings to expedite owner identification.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <label for="status">Status</label>
-      <select id="status" name="status" required>
-        <option value="">Select status</option>
-        <option value="lost">Lost</option>
-        <option value="found">Found</option>
-        <option value="resolved">Resolved</option>
-      </select>
-
-      <label for="image">Attach item image (optional)</label>
-      <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)" />
-      <img id="image-preview" class="preview-image" style="display:none;" />
-
-      <button type="submit">Submit Report</button>
-    </form>
-  </section>
 {% endblock %}
 
 {% block scripts %}
 <script>
-  function previewImage(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function () {
-      const output = document.getElementById('image-preview');
-      output.src = reader.result;
-      output.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const dateInp = document.getElementById('reportedDate');
+    if (dateInp && !dateInp.value) {
+      dateInp.value = new Date().toISOString().split('T')[0];
+      const prevDate = document.getElementById('prev-date');
+      if (prevDate) prevDate.textContent = dateInp.value;
+    }
+  });
 </script>
 {% endblock %}
