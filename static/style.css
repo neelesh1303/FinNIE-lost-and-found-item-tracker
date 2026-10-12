@@ -519,6 +519,132 @@ button, input, select, textarea {
   50% { transform: rotate(15deg) scale(1.15); filter: drop-shadow(0 0 12px #38bdf8); }
 }
 
+/* -------------------------------------------------------------------------- */
+/* Auth Pages                                                                 */
+/* -------------------------------------------------------------------------- */
+.auth-shell {
+  display: grid;
+  place-items: center;
+  min-height: 60vh;
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  width: min(100%, 440px);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: 2rem 1.5rem;
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.auth-logo {
+  width: 48px;
+  height: 56px;
+}
+
+.auth-title {
+  color: var(--slate-900);
+  font-size: 1.5rem;
+}
+
+.auth-subtitle {
+  color: var(--slate-500);
+  font-size: 0.77rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.auth-heading {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--slate-900);
+  margin-bottom: 1rem;
+}
+
+.auth-error {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #b91c1c;
+  border-radius: var(--radius-md);
+  padding: 0.8rem 0.9rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.auth-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--slate-700);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.auth-form input {
+  width: 100%;
+  border: 1px solid var(--slate-300);
+  border-radius: var(--radius-md);
+  padding: 0.8rem 0.9rem;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--primary-600);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.auth-submit-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.auth-switch {
+  margin-top: 1.2rem;
+  color: var(--slate-600);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.auth-switch a {
+  color: var(--primary-600);
+  font-weight: 600;
+}
+
+.welcome-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #065f46;
+  border-radius: var(--radius-full);
+  padding: 0.7rem 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.welcome-banner a {
+  color: var(--primary-700);
+  font-weight: 700;
+}
+
 /* Floating Items Animation */
 .float-item-keys { animation: driftCards 7s ease-in-out infinite; }
 .float-item-phone { animation: driftCards 7.5s ease-in-out infinite 1s; }

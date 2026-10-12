@@ -50,14 +50,24 @@
         <span class="tab-icon">◈</span>
         <span>Dashboard</span>
       </a>
-      <a href="{{ url_for('reported_items') }}" class="nav-tab {% if request.endpoint == 'reported_items' %}active{% endif %}">
-        <span class="tab-icon">◎</span>
-        <span>Found Items Registry</span>
-        <span class="tab-counter">Live</span>
+      {% if session.get('user_email') %}
+        <a href="{{ url_for('reported_items') }}" class="nav-tab {% if request.endpoint == 'reported_items' %}active{% endif %}">
+          <span class="tab-icon">◎</span>
+          <span>Found Items Registry</span>
+          <span class="tab-counter">Live</span>
+        </a>
+        <a href="{{ url_for('report') }}" class="nav-tab {% if request.endpoint == 'report' %}active{% endif %}">
+          <span class="tab-icon">＋</span>
+          <span>Submit Report</span>
+        </a>
+      {% endif %}
+      <a href="{{ url_for('login') }}" class="nav-tab {% if request.endpoint == 'login' %}active{% endif %}">
+        <span class="tab-icon">↗</span>
+        <span>Login</span>
       </a>
-      <a href="{{ url_for('report') }}" class="nav-tab {% if request.endpoint == 'report' %}active{% endif %}">
-        <span class="tab-icon">＋</span>
-        <span>Submit Report</span>
+      <a href="{{ url_for('register') }}" class="nav-tab {% if request.endpoint == 'register' %}active{% endif %}">
+        <span class="tab-icon">✦</span>
+        <span>Register</span>
       </a>
     </nav>
   </header>

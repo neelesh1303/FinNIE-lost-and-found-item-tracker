@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {% if mode == 'login' %}FinNIE · Login{% else %}FinNIE · Register{% endif %}
+{% endblock %}
+
+{% block content %}
+  <section class="auth-shell">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="nie-crest-badge auth-logo">
+          <img src="{{ url_for('static', filename='images/nie_logo.svg') }}" alt="NIE Crest" />
+        </div>
+        <div>
+          <div class="brand-title auth-title">FinNIE</div>
+          <p class="auth-subtitle">Campus Lost &amp; Found Access</p>
+        </div>
+      </div>
+
+      <h1 class="auth-heading">
+        {% if mode == 'login' %}Login{% else %}Register{% endif %}
+      </h1>
+
+      {% if error %}
+        <div class="auth-error">{{ error }}</div>
+      {% endif %}
+
+      <form action="{{ url_for('login' if mode == 'login' else 'register') }}" method="POST" class="auth-form">
+        {% if mode == 'register' %}
+          <label>
+            Full Name
+            <input type="text" name="name" placeholder="Your full name" required />
+          </label>
+        {% endif %}
+
+        <label>
+          Email
+          <input type="email" name="email" placeholder="name@nie.ac.in" required />
+        </label>
+
+        <label>
+          Password
+          <input type="password" name="password" placeholder="Enter password" required />
+        </label>
+
+        <button type="submit" class="btn btn-primary auth-submit-btn">
+          {% if mode == 'login' %}Login{% else %}Register{% endif %}
+        </button>
+      </form>
+
+      <p class="auth-switch">
+        {% if mode == 'login' %}
+          New here? <a href="{{ url_for('register') }}">Create an account</a>
+        {% else %}
+          Already have an account? <a href="{{ url_for('login') }}">Login here</a>
+        {% endif %}
+      </p>
+    </div>
+  </section>
+{% endblock %}

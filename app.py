@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from flask_mysqldb import MySQL
 import os
 from werkzeug.utils import secure_filename
@@ -9,6 +9,7 @@ from flask_limiter.util import get_remote_address
 load_dotenv()
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'finnie-dev-secret-key')
 
 limiter = Limiter(
     key_func=get_remote_address,
@@ -41,20 +42,82 @@ SAMPLE_FOUND_ITEMS = [
     (6, 'Denim College Jacket (Size M)', 'lostdesk@nie.ac.in', '+91 97766 55443', 'clothing', 'Found hanging on chair in 3rd floor Computer Lab.', '2026-09-25', 'found', 'res_pic.jpg')
 ]
 
+# ---------- Simple in-memory user auth for demo use ----------
+USERS = {}
+
+
+def login_required(view_func):
+    def wrapped(*args, **kwargs):
+        if 'user_email' not in session:
+            return redirect(url_for('login'))
+        return view_func(*args, **kwargs)
+    wrapped.__name__ = view_func.__name__
+    return wrapped
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        name = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip().lower()
+        password = request.form.get('password', '').strip()
+
+        if not name or not email or not password:
+            return render_template('auth.html', mode='register', error='Please complete all fields.')
+
+        if not email.endswith('@nie.ac.in'):
+            return render_template('auth.html', mode='register', error='Use a valid @nie.ac.in institutional email.')
+
+        if email in USERS:
+            return render_template('auth.html', mode='register', error='This email is already registered.')
+
+        USERS[email] = {'name': name, 'email': email, 'password': password}
+        session['user_name'] = name
+        session['user_email'] = email
+        return redirect(url_for('home'))
+
+    return render_template('auth.html', mode='register')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip().lower()
+        password = request.form.get('password', '').strip()
+        user = USERS.get(email)
+
+        if user and user['password'] == password:
+            session['user_name'] = user['name']
+            session['user_email'] = email
+            return redirect(url_for('home'))
+
+        return render_template('auth.html', mode='login', error='Invalid email or password.')
+
+    return render_template('auth.html', mode='login')
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
+
+
 # ---------- Routes ----------
 
 # Home page: FinNIE landing page with dynamic mascot stage
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', current_user=session.get('user_name'))
 
 # Report item page
 @app.route('/report')
+@login_required
 def report():
     return render_template('report.html')
 
 # Form submission handler
 @app.route('/submit', methods=['POST'])
+@login_required
 @limiter.limit("10 per minute")
 def submit():
     # Get form data
@@ -103,6 +166,7 @@ def submit():
 
 # Reported items page: Shows only items marked as 'found'
 @app.route('/reported')
+@login_required
 def reported_items():
     search_query = request.args.get('q', '').strip()
     category = request.args.get('category', '').strip()

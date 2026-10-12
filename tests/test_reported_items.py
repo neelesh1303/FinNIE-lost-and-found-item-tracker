@@ -31,6 +31,10 @@ class ReportedItemsRouteTests(unittest.TestCase):
         class DummyMySQL:
             connection = FakeConnection()
 
+        with self.app.session_transaction() as sess:
+            sess['user_email'] = 'student@nie.ac.in'
+            sess['user_name'] = 'Student'
+
         with app_module.app.app_context():
             original = app_module.mysql
             app_module.mysql = DummyMySQL()
