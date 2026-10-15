@@ -614,18 +614,6 @@ button, input, select, textarea {
   margin-top: 0.5rem;
 }
 
-.auth-switch {
-  margin-top: 1.2rem;
-  color: var(--slate-600);
-  font-size: 0.92rem;
-  text-align: center;
-}
-
-.auth-switch a {
-  color: var(--primary-600);
-  font-weight: 600;
-}
-
 .welcome-banner {
   display: inline-flex;
   align-items: center;

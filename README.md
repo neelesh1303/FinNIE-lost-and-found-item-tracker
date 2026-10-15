@@ -53,7 +53,7 @@ FinNIE/
 ├── templates/
 │   ├── base.html           # Shared layout
 │   ├── home.html           # Landing page
-│   ├── login.html          # Login page
+│   ├── auth.html           # NIE email access page
 │   ├── report.html         # Report submission form
 │   └── reported.html       # Found items listing
 │

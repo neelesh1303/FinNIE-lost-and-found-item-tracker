@@ -61,14 +61,17 @@
           <span>Submit Report</span>
         </a>
       {% endif %}
-      <a href="{{ url_for('login') }}" class="nav-tab {% if request.endpoint == 'login' %}active{% endif %}">
-        <span class="tab-icon">↗</span>
-        <span>Login</span>
-      </a>
-      <a href="{{ url_for('register') }}" class="nav-tab {% if request.endpoint == 'register' %}active{% endif %}">
-        <span class="tab-icon">✦</span>
-        <span>Register</span>
-      </a>
+      {% if session.get('user_email') %}
+        <a href="{{ url_for('logout') }}" class="nav-tab">
+          <span class="tab-icon">↗</span>
+          <span>Logout</span>
+        </a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="nav-tab {% if request.endpoint == 'login' %}active{% endif %}">
+          <span class="tab-icon">↗</span>
+          <span>NIE Email Access</span>
+        </a>
+      {% endif %}
     </nav>
   </header>
 

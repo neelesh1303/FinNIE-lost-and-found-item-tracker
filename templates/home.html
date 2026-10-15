@@ -40,7 +40,6 @@
         {% if current_user %}
           <div class="welcome-banner">
             <span>Welcome, {{ current_user }}!</span>
-            <a href="{{ url_for('logout') }}">Logout</a>
           </div>
         {% endif %}
 
@@ -54,11 +53,8 @@
               <span>Browse Active Registry</span>
             </a>
           {% else %}
-            <a href="{{ url_for('register') }}" class="btn btn-primary">
-              <span>Create Account</span>
-            </a>
-            <a href="{{ url_for('login') }}" class="btn btn-secondary">
-              <span>Login</span>
+            <a href="{{ url_for('login') }}" class="btn btn-primary">
+              <span>Continue with NIE Email</span>
             </a>
           {% endif %}
         </div>

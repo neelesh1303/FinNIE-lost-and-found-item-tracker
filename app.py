@@ -42,58 +42,45 @@ SAMPLE_FOUND_ITEMS = [
     (6, 'Denim College Jacket (Size M)', 'lostdesk@nie.ac.in', '+91 97766 55443', 'clothing', 'Found hanging on chair in 3rd floor Computer Lab.', '2026-09-25', 'found', 'res_pic.jpg')
 ]
 
-# ---------- Simple in-memory user auth for demo use ----------
-USERS = {}
+def is_nie_email(email):
+    return (
+        email.count('@') == 1
+        and bool(email.split('@', 1)[0])
+        and email.endswith('@nie.ac.in')
+    )
 
 
 def login_required(view_func):
     def wrapped(*args, **kwargs):
-        if 'user_email' not in session:
+        email = session.get('user_email')
+        if not isinstance(email, str):
+            session.clear()
             return redirect(url_for('login'))
+        email = email.strip().lower()
+        if not is_nie_email(email):
+            session.clear()
+            return redirect(url_for('login'))
+        session['user_email'] = email
         return view_func(*args, **kwargs)
     wrapped.__name__ = view_func.__name__
     return wrapped
-
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        name = request.form.get('name', '').strip()
-        email = request.form.get('email', '').strip().lower()
-        password = request.form.get('password', '').strip()
-
-        if not name or not email or not password:
-            return render_template('auth.html', mode='register', error='Please complete all fields.')
-
-        if not email.endswith('@nie.ac.in'):
-            return render_template('auth.html', mode='register', error='Use a valid @nie.ac.in institutional email.')
-
-        if email in USERS:
-            return render_template('auth.html', mode='register', error='This email is already registered.')
-
-        USERS[email] = {'name': name, 'email': email, 'password': password}
-        session['user_name'] = name
-        session['user_email'] = email
-        return redirect(url_for('home'))
-
-    return render_template('auth.html', mode='register')
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email', '').strip().lower()
-        password = request.form.get('password', '').strip()
-        user = USERS.get(email)
+        if not is_nie_email(email):
+            return render_template(
+                'auth.html',
+                error='Use an email address ending in @nie.ac.in to continue.',
+            )
 
-        if user and user['password'] == password:
-            session['user_name'] = user['name']
-            session['user_email'] = email
-            return redirect(url_for('home'))
+        session['user_name'] = email.split('@', 1)[0]
+        session['user_email'] = email
+        return redirect(url_for('home'))
 
-        return render_template('auth.html', mode='login', error='Invalid email or password.')
-
-    return render_template('auth.html', mode='login')
+    return render_template('auth.html')
 
 
 @app.route('/logout')
@@ -113,7 +100,7 @@ def home():
 @app.route('/report')
 @login_required
 def report():
-    return render_template('report.html')
+    return render_template('report.html', user_email=session['user_email'])
 
 # Form submission handler
 @app.route('/submit', methods=['POST'])
@@ -122,16 +109,13 @@ def report():
 def submit():
     # Get form data
     name = request.form['name']
-    email = request.form['email'].strip().lower()
+    email = session['user_email']
     phone = request.form['phone']
     category = request.form['category']
     description = request.form['description']
     reported_date = request.form['reportedDate']
     status = request.form['status']
     image_file = request.files.get('image')
-
-    if not email.endswith('@nie.ac.in'):
-        return "Only @nie.ac.in email addresses are allowed.", 400
 
     # Handle image upload
     image_filename = None
